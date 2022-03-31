@@ -1,0 +1,92 @@
+import numpy as np
+import cv2
+import math
+
+img1 = cv2.imread('Img1.png')
+img2 = cv2.imread('Img2.png')
+
+c_imag1 = cv2.resize(img1, dsize = (300, 350), interpolation=cv2.INTER_CUBIC)
+c_imag2 = cv2.resize(img2, dsize = (300, 350), interpolation=cv2.INTER_CUBIC)
+
+print(c_imag1)
+print("------------1------------")
+
+print(c_imag2)
+print("------------2------------")
+
+cv2.imshow('Img1',c_imag1)
+cv2.imshow('Img2',c_imag2)
+
+A = cv2.waitKey(0) & 0xFF
+if A ==ord('a'):
+    
+    #SUMA
+    #Metodologia 1
+    sum_imag = cv2.add(c_imag1,c_imag2)
+    print(sum_imag)
+    cv2.imshow('Suma',sum_imag)
+    cv2.waitKey(0)
+
+    #Metodologia2
+    sum2_imag = c_imag1 + c_imag2
+    print(sum2_imag)
+    cv2.imshow('Suma_2',sum2_imag)
+    cv2.waitKey(0)
+
+    #Metodologia3
+    sum3_imag = cv2.addWeighted(c_imag1, 0.5, c_imag2, 0.5, 0)
+    print(sum3_imag)
+    cv2.imshow('Suma_3',sum3_imag)
+    cv2.waitKey(0)
+
+    #RESTA
+    resta_imag = cv2.subtract(c_imag1,c_imag2)
+    print(resta_imag)
+    cv2.imshow('Resta',resta_imag)
+    cv2.waitKey(0)
+
+    #DIVISION
+    division_imag = cv2.divide(c_imag1, c_imag2)
+    print(division_imag)
+    cv2.imshow('Division',division_imag)
+    cv2.waitKey(0)
+
+    #MULTIPLICACIÓN
+    multiplicacion_imag = cv2.multiply(c_imag1, c_imag2)
+    print(multiplicacion_imag)
+    cv2.imshow('Multiplicacion',multiplicacion_imag)
+    cv2.waitKey(0)
+
+    #LOGARITMO NATURAL
+    c = 255 / np.log(1 + np.max(img1)) 
+    log_image = c * (np.log(img1 + 1)) 
+    log_image = np.array(log_image, dtype = np.uint8) 
+    cv2.imshow('Logaritmo',log_image)
+    cv2.waitKey(0)
+
+    #RAIZ CUADRADA 
+    raiz = (img1**(0.5))
+    cv2.imshow('Raiz',raiz)
+    cv2.waitKey()
+
+    #DERIVADA
+    derivada = cv2.Laplacian(img1,cv2.CV_64F)
+    cv2.imshow('Derivada',derivada)
+    cv2.waitKey()
+    cv2.waitKey(0)
+
+    #POTENCIA
+    potencia = np.zeros(img1.shape, img1.dtype)
+    g = 0.5
+    potencia = c * np.power(img1,g)
+    maxil = np.amax(potencia)
+    potencia = np.uint8(potencia/maxil * 255)
+    cv2.imshow('Potencia',potencia)
+    cv2.waitKey()
+    cv2.destroyWindow('potencia')
+
+    Pote = cv2.pow(img1,2)
+    cv2.imshow('Pote',Pote)
+    cv2.waitKey()
+    cv2.destroyWindow('Pote')
+
